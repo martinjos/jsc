@@ -13,16 +13,40 @@
         out = error;
       }
       const doc = output.contentDocument;
-      doc.body.innerHTML += `<br>&gt;&gt;&gt; ${inp}<br>${out}`;
+      doc.body.innerHTML += `<p>&gt;&gt;&gt; ${inp}</p><p>${out}</p>`;
+      input.value = "";
     }
   </script>
+  <style>
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    #input-row {
+      flex: none;
+      display: flex;
+      flex-direction: row;
+    }
+    #input { flex: auto; }
+    #go { flex: none; }
+    #output-row { flex: auto; }
+  </style>
 </head>
 
 <body>
-  <input id="input">
-  <button onclick="go()">Go</button>
-  <br>
-  <iframe id="output" src="about:blank"></iframe>
+  <div id="input-row">
+    <textarea id="input" rows="1"></textarea>
+    <button id="go" onclick="go()">Go</button>
+  </div>
+  <div id="output-row">
+    <iframe id="output" src="about:blank"></iframe>
+  </div>
   <script>
     output.contentDocument.innerHTML = "<html><head></head><body></body></html>";
   </script>
