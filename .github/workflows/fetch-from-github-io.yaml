@@ -22,6 +22,8 @@ jobs:
         run: git clone --branch "$SITE_BRANCH" "$SITE_REPO_URL" site
       - name: Copy commits for file
         run: |
+          git config user.name 'Martin Sidaway'
+          git config user.email '2389068+martinjos@users.noreply.github.com'
           cd site
           for commit in $(git rev-list $SITE_BRANCH); do
             if git show --pretty="" --name-only $commit | grep "$FILE_PAT"; then
