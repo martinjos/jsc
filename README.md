@@ -1,0 +1,2 @@
+# jsc
+Simple JavaScript console
