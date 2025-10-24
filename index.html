@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JS Console</title>
   <script>
+    // Warn about data loss before leaving page
+    window.onbeforeunload = (() => true);
+    
     function go() {
       const inp = input.value;
       let out = "";
@@ -20,6 +23,7 @@
       input.value = "";
     }
   </script>
+  
   <style id="style">
     html, body, #page {
       height: stretch;
@@ -56,6 +60,7 @@
     </div>
     <iframe id="output" src="about:blank"></iframe>
   </div>
+  
   <script>
     const styleHTML = `<style>${style.innerHTML}</style>`;
     output.contentDocument.innerHTML = `<html><head>${styleHTML}</head><body></body></html>`;
