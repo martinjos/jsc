@@ -8,13 +8,15 @@
     function go() {
       const inp = input.value;
       let out = "";
+      let cls = "result";
       try {
         out = eval(inp);
       } catch (error) {
         out = error;
+        cls = "error";
       }
       const doc = output.contentDocument;
-      doc.body.innerHTML += `<p>&gt;&gt;&gt; ${inp}</p><p>${out}</p>`;
+      doc.body.innerHTML += `<div class="history-item">&gt;&gt;&gt; ${inp}</div><div class="${cls}">${out}</div>`;
       input.value = "";
     }
   </script>
@@ -38,6 +40,11 @@
       flex: auto;
       height: stretch;
     }
+    .history-item, .result, .error {
+      font: monospace;
+    }
+    .result { color: blue; }
+    .error { color: red; }
   </style>
 </head>
 
