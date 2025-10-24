@@ -19,7 +19,7 @@ jobs:
       - name: Check URL
         run: test "$SITE_REPO_URL" = "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY_OWNER/$GITHUB_REPOSITORY_OWNER.github.io"
       - name: Fetch github.io site
-        run: git clone "$SITE_REPO_URL" site
+        run: git clone --branch "$SITE_BRANCH" "$SITE_REPO_URL" site
       - name: Copy commits for file
         run: |
           cd site
