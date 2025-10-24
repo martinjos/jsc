@@ -34,7 +34,10 @@
     }
     #input { flex: auto; }
     #go { flex: none; }
-    #output-row { flex: auto; }
+    #output {
+      flex: auto;
+      height: 100%;
+    }
   </style>
 </head>
 
@@ -44,9 +47,7 @@
       <textarea id="input" rows="1"></textarea>
       <button id="go" onclick="go()">Go</button>
     </div>
-    <div id="output-row">
-      <iframe id="output" src="about:blank"></iframe>
-    </div>
+    <iframe id="output" src="about:blank"></iframe>
   </div>
   <script>
     output.contentDocument.innerHTML = "<html><head></head><body></body></html>";
