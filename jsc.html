@@ -12,7 +12,9 @@
       } catch (error) {
         out = error;
       }
-      output.contentDocument.textContent += `>>> ${inp}\n${out}\n`;
+      const doc = output.contentDocument;
+      window.alert(`${doc}\n>>> ${inp}\n${out}\n`);
+      doc.textContent += `>>> ${inp}\n${out}\n`;
     }
   </script>
 </head>
@@ -21,5 +23,8 @@
 <input id="input">
 <button onclick="go()">Go</button>
 <iframe id="output" src="about:blank"></iframe>
+<script>
+  output.contentDocument.innerHTML = "<html><head></head><body></body></html>";
+</script>
 </body>
 </html>
