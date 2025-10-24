@@ -12,7 +12,7 @@
       } catch (error) {
         out = error;
       }
-      output.textContent += `>>> ${inp}\n${out}\n`;
+      output.contentDocument.textContent += `>>> ${inp}\n${out}\n`;
     }
   </script>
 </head>
