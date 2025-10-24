@@ -1,6 +1,6 @@
 on: [push]
 jobs:
-  fetch-from-github.io:
+  fetch-from-github-io:
     runs-on: ubuntu-latest
     env:
       SITE_REPO_URL: https://github.com/martinjos/martinjos.github.io
