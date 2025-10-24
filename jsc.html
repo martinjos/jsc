@@ -14,8 +14,8 @@
       }
       const doc = output.contentDocument;
       window.alert(`${doc}\n>>> ${inp}\n${out}\n`);
-      doc.textContent += `>>> ${inp}\n${out}\n`;
-      window.alert(`doc contains: ${doc.textContent}`);
+      doc.body.textContent += `>>> ${inp}\n${out}\n`;
+      window.alert(`doc contains: ${doc.body.textContent}`);
     }
   </script>
 </head>
