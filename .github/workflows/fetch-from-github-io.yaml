@@ -26,14 +26,18 @@ jobs:
           git config user.email '2389068+martinjos@users.noreply.github.com'
           cd site
           revs="$(git rev-list $SITE_BRANCH | tac)"
-          echo "Commits to apply: $revs"
+          apply_revs=""
           for commit in $revs; do
             if git show --pretty="" --name-only $commit | grep "$FILE_PAT"; then
-              git format-patch --stdout -1 > patch.diff
-              cd ..
-              git am site/patch.diff
-              cd site
+              apply_revs="$apply_revs $commit"
             fi
+          done
+          echo "Commits to apply: $apply_revs"
+          for commit in $apply_revs; do
+            git format-patch --stdout -1 > patch.diff
+            cd ..
+            git am site/patch.diff
+            cd site
           done
           cd ..
       - name: Log
