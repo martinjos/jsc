@@ -18,13 +18,13 @@
     }
   </script>
   <style>
-    html {
+    html, body, #page {
+      padding: 0;
+      margin: 0;
       height: 100%;
       width: 100%;
     }
-    body {
-      height: 100%;
-      width: 100%;
+    #page {
       display: flex;
       flex-direction: column;
     }
@@ -40,12 +40,14 @@
 </head>
 
 <body>
-  <div id="input-row">
-    <textarea id="input" rows="1"></textarea>
-    <button id="go" onclick="go()">Go</button>
-  </div>
-  <div id="output-row">
-    <iframe id="output" src="about:blank"></iframe>
+  <div id="page">
+    <div id="input-row">
+      <textarea id="input" rows="1"></textarea>
+      <button id="go" onclick="go()">Go</button>
+    </div>
+    <div id="output-row">
+      <iframe id="output" src="about:blank"></iframe>
+    </div>
   </div>
   <script>
     output.contentDocument.innerHTML = "<html><head></head><body></body></html>";
