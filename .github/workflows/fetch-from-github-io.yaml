@@ -28,12 +28,14 @@ jobs:
           revs="$(git rev-list $SITE_BRANCH | tac)"
           apply_revs=""
           for commit in $revs; do
-            if git show --pretty="" --name-only $commit | grep "$FILE_PAT"; then
+            if git show --pretty="" --name-only $commit | grep "$FILE_PAT" > /dev/null; then
               apply_revs="$apply_revs $commit"
             fi
           done
           echo "Commits to apply: $apply_revs"
           for commit in $apply_revs; do
+            echo "Apply $commit"
+            git checkout "$commit"
             git format-patch --stdout -1 > patch.diff
             cd ..
             git am site/patch.diff
