@@ -25,7 +25,7 @@ jobs:
           git config user.name 'Martin Sidaway'
           git config user.email '2389068+martinjos@users.noreply.github.com'
           cd site
-          revs="$(git rev-list $SITE_BRANCH | tac -s ' ')"
+          revs="$(git rev-list $SITE_BRANCH | tac)"
           echo "Commits to apply: $revs"
           for commit in $revs; do
             if git show --pretty="" --name-only $commit | grep "$FILE_PAT"; then
