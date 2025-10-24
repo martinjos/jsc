@@ -20,7 +20,7 @@
       input.value = "";
     }
   </script>
-  <style>
+  <style id="style">
     html, body, #page {
       height: stretch;
       width: stretch;
@@ -57,7 +57,8 @@
     <iframe id="output" src="about:blank"></iframe>
   </div>
   <script>
-    output.contentDocument.innerHTML = "<html><head></head><body></body></html>";
+    const styleHTML = `<style>${style.innerHTML}</style>`;
+    output.contentDocument.innerHTML = `<html><head>${styleHTML}</head><body></body></html>`;
   </script>
 </body>
 </html>
