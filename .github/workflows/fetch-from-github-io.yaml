@@ -1,0 +1,38 @@
+on: [push]
+jobs:
+  fetch-from-github.io:
+    runs-on: ubuntu-latest
+    env:
+      SITE_REPO_URL: https://github.com/martinjos/martinjos.github.io
+      SITE_BRANCH: master-R
+      FILE_PAT: '^jsc\.html$'
+      FILE_SRC_NAME: jsc.html
+      FILE_DST_NAME: index.html
+      TARGET_BRANCH: main
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Switch to target branch
+        run: git checkout "$TARGET_BRANCH"
+      - name: Check URL
+        run: test "$SITE_REPO_URL" = "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY_OWNER/$GITHUB_REPOSITORY_OWNER.github.io"
+      - name: Fetch github.io site
+        run: git clone "$SITE_REPO_URL" site
+      - name: Copy commits for file
+        run: |
+          cd site
+          for commit in $(git rev-list $SITE_BRANCH); do
+            if git show --pretty="" --name-only $commit | grep "$FILE_PAT"; then
+              git format-patch --stdout -1 > patch.diff
+              cd ..
+              git am site/patch.diff
+              cd site
+            fi
+          done
+          cd ..
+      - name: Log
+        run: git log --format=fuller --decorate
+      - name: Push
+        run: git push
