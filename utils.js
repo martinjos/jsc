@@ -25,5 +25,5 @@ function dir(obj) {
       }
     }
   }
-  return ns;
+  return ns.sort();
 }
