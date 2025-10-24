@@ -63,8 +63,8 @@
   </div>
   
   <script>
-    const styleHTML = `<style>${style.innerHTML}</style>`;
-    output.contentDocument.innerHTML = `<html><head>${styleHTML}</head><body></body></html>`;
+    const doc = output.contentDocument;
+    doc.head.innerHTML = style.outerHTML;
   </script>
 </body>
 </html>
