@@ -25,7 +25,7 @@ jobs:
           git config user.name 'Martin Sidaway'
           git config user.email '2389068+martinjos@users.noreply.github.com'
           cd site
-          for commit in $(git rev-list $SITE_BRANCH); do
+          for commit in $(git rev-list --reverse $SITE_BRANCH); do
             if git show --pretty="" --name-only $commit | grep "$FILE_PAT"; then
               git format-patch --stdout -1 > patch.diff
               cd ..
