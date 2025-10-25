@@ -8,6 +8,9 @@
   <script>
     // Warn about data loss before leaving page
     window.onbeforeunload = (() => true);
+
+    // Document within iframe
+    var idoc;
     
     function go() {
       let inp = input.value;
@@ -69,7 +72,7 @@
   </div>
   
   <script>
-    var idoc = output.contentDocument;
+    idoc = output.contentDocument;
     idoc.head.innerHTML = style.outerHTML;
   </script>
 </body>
