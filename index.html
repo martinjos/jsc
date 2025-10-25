@@ -8,9 +8,6 @@
   <script>
     // Warn about data loss before leaving page
     window.onbeforeunload = (() => true);
-
-    // Document within iframe
-    var idoc;
     
     function go() {
       let inp = input.value;
@@ -22,7 +19,8 @@
         out = error;
         cls = "error";
       }
-      idoc.body.innerHTML += `<div class="history-item">>>> ${quote(inp)}</div><div class="${cls}">${quote(out)}</div>`;
+      let doc = output.contentDocument;
+      doc.body.innerHTML += `<div class="history-item">>>> ${quote(inp)}</div><div class="${cls}">${quote(out)}</div>`;
       input.value = "";
     }
     
@@ -72,7 +70,7 @@
   </div>
   
   <script>
-    idoc = output.contentDocument;
+    var idoc = output.contentDocument;
     idoc.head.innerHTML = style.outerHTML;
   </script>
 </body>
