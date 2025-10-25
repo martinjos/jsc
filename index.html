@@ -20,8 +20,15 @@
         cls = "error";
       }
       const doc = output.contentDocument;
-      doc.body.innerHTML += `<div class="history-item">&gt;&gt;&gt; ${inp}</div><div class="${cls}">${out}</div>`;
+      doc.body.innerHTML += `<div class="history-item">>>> ${quote(inp)}</div><div class="${cls}">${quote(out)}</div>`;
       input.value = "";
+    }
+    
+    function quote(str) {
+      str = String(str);
+      str = str.replaceAll("&", "&amp;");
+      str = str.replaceAll("<", "&lt;");
+      return str;
     }
   </script>
   
