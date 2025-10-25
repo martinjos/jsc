@@ -10,7 +10,7 @@
     window.onbeforeunload = (() => true);
     
     function go() {
-      const inp = input.value;
+      let inp = input.value;
       let out = "";
       let cls = "result";
       try {
@@ -19,7 +19,7 @@
         out = error;
         cls = "error";
       }
-      const doc = output.contentDocument;
+      let doc = output.contentDocument;
       doc.body.innerHTML += `<div class="history-item">>>> ${quote(inp)}</div><div class="${cls}">${quote(out)}</div>`;
       input.value = "";
     }
@@ -70,7 +70,7 @@
   </div>
   
   <script>
-    const doc = output.contentDocument;
+    let doc = output.contentDocument;
     doc.head.innerHTML = style.outerHTML;
   </script>
 </body>
