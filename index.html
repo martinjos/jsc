@@ -19,8 +19,7 @@
         out = error;
         cls = "error";
       }
-      let doc = output.contentDocument;
-      doc.body.innerHTML += `<div class="history-item">>>> ${quote(inp)}</div><div class="${cls}">${quote(out)}</div>`;
+      idoc.body.innerHTML += `<div class="history-item">>>> ${quote(inp)}</div><div class="${cls}">${quote(out)}</div>`;
       input.value = "";
     }
     
