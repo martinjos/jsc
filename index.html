@@ -19,8 +19,7 @@
         out = error;
         cls = "error";
       }
-      let doc = output.contentDocument;
-      doc.body.innerHTML += `<div class="history-item">>>> ${quote(inp)}</div><div class="${cls}">${quote(out)}</div>`;
+      output.innerHTML += `<div class="history-item">>>> ${quote(inp)}</div><div class="${cls}">${quote(out)}</div>`;
       input.value = "";
     }
     
@@ -51,6 +50,7 @@
     #output {
       flex: auto;
       height: stretch;
+      overflow-y: scroll;
     }
     .history-item, .result, .error {
       font: monospace;
@@ -66,12 +66,7 @@
       <textarea id="input" rows="1"></textarea>
       <button id="go" onclick="go()">Go</button>
     </div>
-    <iframe id="output" src="about:blank"></iframe>
+    <div id="output"></div>
   </div>
-  
-  <script>
-    var idoc = output.contentDocument;
-    idoc.head.innerHTML = style.outerHTML;
-  </script>
 </body>
 </html>
