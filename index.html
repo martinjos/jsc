@@ -36,9 +36,15 @@
       let oldHeight = page.clientHeight;
       page.style.height = `calc(${htmlHeight} - ${marginTop} - ${marginBot})`;
       let newHeight = page.clientHeight;
-      if (oldHeight > newHeight) {
+      if (oldHeight > newHeight && lastOutputVisible()) {
         output.scrollTop += oldHeight - newHeight;
       }
+    }
+
+    function lastOutputVisible() {
+      let outputBot = output.getBoundingClientRect().bottom;
+      let lastBot = output.lastElementChild.getBoundingClientRect().bottom;
+      return lastBot <= outputBot;
     }
 
     function log(str, cls) {
