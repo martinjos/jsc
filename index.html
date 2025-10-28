@@ -15,7 +15,15 @@
       window.body = document.body;
       window.gcs = window.getComputedStyle;
       window.visualViewport.onresize = updateHeight;
+      input.oninput = onInput;
       updateHeight();
+    }
+
+    function onInput(e) {
+      let prefHeight = Math.min(input.scrollHeight, html.clientHeight/4);
+      if (prefHeight != input.clientHeight) {
+        input.style.height = `${prefHeight}px`;
+      }
     }
 
     function updateHeight() {
