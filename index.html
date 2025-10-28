@@ -8,6 +8,20 @@
   <script>
     // Warn about data loss before leaving page
     window.onbeforeunload = (() => true);
+
+    function start() {
+      window.html = document.documentElement;
+      window.head = document.head;
+      window.body = document.body;
+      updateHeight();
+    }
+
+    function updateHeight() {
+      let htmlHeight = getComputedStyle(html).height;
+      let marginTop = getComputedStyle(body).marginTop;
+      let marginBot = getComputedStyle(body).marginBottom;
+      page.style.height = `calc(${htmlHeight} - ${marginTop} - ${marginBot})`;
+    }
     
     function go() {
       let inp = input.value;
@@ -32,7 +46,11 @@
   </script>
   
   <style id="style">
-    html, body, #page {
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    body, #page {
       height: stretch;
       width: stretch;
     }
@@ -51,6 +69,8 @@
       flex: auto;
       height: stretch;
       overflow-y: scroll;
+      border: inset;
+      padding: 4px;
     }
     .history-item, .result, .error {
       font: monospace;
@@ -68,5 +88,8 @@
     </div>
     <div id="output"></div>
   </div>
+  <script>
+    start();
+  </script>
 </body>
 </html>
