@@ -16,12 +16,22 @@ class ObjectView {
     if (this.childrenObj === null) {
       this.childrenObj = this.doc.createElement("div");
       this.childrenObj.style.display = "none";
-      this.childrenObj.style.paddingLeft = "2em";
+      this.childrenObj.style.paddingLeft = "1em";
       this.mainObj.appendChild(this.childrenObj);
       for (let name of dir(this.obj)) {
         let nameObj = this.doc.createElement("div");
-        nameObj.textContent = name;
         this.childrenObj.appendChild(nameObj);
+        let childObj = this.obj[name];
+        if ((typeof childObj == "object"
+             || typeof childObj == "function")
+            && childObj !== null) {
+          nameObj.textContent = `${name}:`;
+          let childElem = new ObjectView(this.doc, childObj).getDOMObject();
+          childElem.paddingLeft = "1em";
+          this.childrenObj.appendChild(childElem);
+        } else {
+          nameObj.textContent = `${name}: ${JSON.stringify(childObj)}`;
+        }
       }
     }
     if (this.childrenObj.style.display == "block") {
