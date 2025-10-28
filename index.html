@@ -33,7 +33,10 @@
       let htmlHeight = window.visualViewport.height.toFixed(3) + "px";
       let marginTop = gcs(body).marginTop;
       let marginBot = gcs(body).marginBottom;
+      let oldHeight = page.clientHeight;
       page.style.height = `calc(${htmlHeight} - ${marginTop} - ${marginBot})`;
+      let newHeight = page.clientHeight;
+      output.scrollTop += oldHeight - newHeight;
     }
 
     function log(str, cls) {
