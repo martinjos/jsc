@@ -31,19 +31,20 @@
     function log(str, cls) {
       if (cls === undefined) cls = "log";
       output.innerHTML += `<div class="${cls}">${quote(str)}</div>\n`;
+      output.lastElementChild.scrollIntoView(false);  // false = not to top
     }
     
     function go() {
       let inp = input.value;
       let out = "";
       let cls = "result";
+      log(`>>> ${inp}`, "history-item");
       try {
         out = eval(inp);
       } catch (error) {
         out = error;
         cls = "error";
       }
-      log(`>>> ${inp}`, "history-item");
       log(out, cls);
       input.value = "";
     }
