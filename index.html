@@ -13,13 +13,18 @@
       window.html = document.documentElement;
       window.head = document.head;
       window.body = document.body;
+      window.gcs = window.getComputedStyle;
+      window.visualViewport.onresize = updateHeight;
       updateHeight();
     }
 
     function updateHeight() {
-      let htmlHeight = getComputedStyle(html).height;
-      let marginTop = getComputedStyle(body).marginTop;
-      let marginBot = getComputedStyle(body).marginBottom;
+      if (window.visualViewport.scale != 1) {
+        return;
+      }
+      let htmlHeight = window.visualViewport.height.toFixed(3) + "px";
+      let marginTop = gcs(body).marginTop;
+      let marginBot = gcs(body).marginBottom;
       page.style.height = `calc(${htmlHeight} - ${marginTop} - ${marginBot})`;
     }
     
