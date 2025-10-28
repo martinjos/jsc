@@ -27,6 +27,11 @@
       let marginBot = gcs(body).marginBottom;
       page.style.height = `calc(${htmlHeight} - ${marginTop} - ${marginBot})`;
     }
+
+    function log(str, cls) {
+      if (cls === undefined) cls = "log";
+      output.innerHTML += `<div class="${cls}">${quote(str)}</div>\n`;
+    }
     
     function go() {
       let inp = input.value;
@@ -38,7 +43,8 @@
         out = error;
         cls = "error";
       }
-      output.innerHTML += `<div class="history-item">>>> ${quote(inp)}</div><div class="${cls}">${quote(out)}</div>`;
+      log(`>>> ${inp}`, "history-item");
+      log(out, cls);
       input.value = "";
     }
     
@@ -77,11 +83,12 @@
       border: inset;
       padding: 4px;
     }
-    .history-item, .result, .error {
+    .history-item, .result, .error, .log {
       font: monospace;
     }
     .result { color: blue; }
     .error { color: red; }
+    .log { color: green; }
   </style>
 </head>
 
