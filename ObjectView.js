@@ -21,7 +21,8 @@ class ObjectView {
       for (let name of dir(this.obj)) {
         let nameObj = this.doc.createElement("div");
         this.childrenObj.appendChild(nameObj);
-        let childObj = this.obj[name];
+        let childObj = undefined;
+        try { childObj = this.obj[name]; } catch {}
         if ((typeof childObj == "object"
              || typeof childObj == "function")
             && childObj !== null) {
