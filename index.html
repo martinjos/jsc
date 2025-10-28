@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JS Console</title>
   <script src="utils.js"></script>
+  <script src="ObjectView.js"></script>
   <script>
     // Warn about data loss before leaving page
     window.onbeforeunload = (() => true);
@@ -67,8 +68,19 @@
 
     function log(str, cls) {
       if (cls === undefined) cls = "log";
-      output.innerHTML += `<div class="${cls}">${quote(str)}</div>\n`;
-      output.lastElementChild.scrollIntoView(false);  // false = not to top
+      let html = "";
+      let obj = null;
+      if ((typeof str == "object"
+           || typeof str == "function")
+           && str !== "null") {
+        obj = new ObjectView(document, str).getDOMObject();
+      } else {
+        html = quote(str);
+      }
+      output.innerHTML += `<div class="${cls}">${html}</div>\n`;
+      newDiv = output.lastElementChild;
+      if (obj) newDiv.appendChild(obj);
+      newDiv.scrollIntoView(false);  // false = not to top
     }
     
     function go() {
