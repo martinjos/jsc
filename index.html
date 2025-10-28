@@ -24,6 +24,24 @@
       if (prefHeight != input.clientHeight) {
         input.style.height = `${prefHeight}px`;
       }
+      // Assist with building camelCase identifiers
+      // FIXME: don't do this inside string
+      let rangeStart = input.selectionStart;
+      let rangeEnd = input.selectionEnd;
+      if (e.inputType == "insertText"
+          && e.data[0] == " "
+          && e.data.length > 1
+          && rangeStart == rangeEnd
+          && rangeStart - e.data.length > 0) {
+        rangeStart -= e.data.length;
+        let inserted = input.value.substring(rangeStart, rangeEnd);
+        let preChar = input.value.charAt(rangeStart - 1);
+        if (inserted == e.data && /^[a-z]$/i.test(preChar)) {
+          input.value = (input.value.substring(0, rangeStart)
+                         + input.value.charAt(rangeStart + 1).toUpperCase()
+                         + input.value.substring(rangeStart + 2));
+        }
+      }
     }
 
     function updateHeight() {
